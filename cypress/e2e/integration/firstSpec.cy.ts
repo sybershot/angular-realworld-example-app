@@ -95,7 +95,7 @@ describe('Test with backend', () => {
         cy.get('@token').then( token => {
 
             cy.request({
-                url: 'https://api.realworld.io/api/articles/',
+                url: Cypress.env('apiUrl') + '/api/articles/',
                 headers: { 'Authorization': 'Token ' + token},
                 method: 'POST',
                 body: requestBody
@@ -109,7 +109,7 @@ describe('Test with backend', () => {
             
             cy.wait(500) // This wait is needed for the backend to catch up before the request, otherwise test will fail
             cy.request({
-                url: 'https://api.realworld.io/api/articles?limit=10&offset=0',
+                url: Cypress.env('apiUrl') + '/articles?limit=10&offset=0',
                     headers: { 'Authorization': 'Token ' + token},
                     method: 'GET'
             }).its('body').then( body => {
